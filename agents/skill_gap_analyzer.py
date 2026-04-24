@@ -46,9 +46,12 @@ class SkillGapAnalyzer:
             or os.getenv("GROK_API_KEY")
             or os.getenv("GEMINI_API_KEY", "")
         )
+        model_name = None
+        if not resolved_key.startswith("AIza"):
+            model_name = os.getenv("GROQ_MODEL") or os.getenv("GROK_MODEL", "llama-3.3-70b-versatile")
         self.gemini = GeminiClient(
             api_key=resolved_key,
-            model_name=os.getenv("GROQ_MODEL") or os.getenv("GROK_MODEL", "llama-3.3-70b-versatile"),
+            model_name=model_name,
         )
 
     def run(self, payload: SkillGapAnalyzerInput) -> SkillGapAnalyzerResult:

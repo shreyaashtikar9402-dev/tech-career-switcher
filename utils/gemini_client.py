@@ -6,7 +6,6 @@ import json
 import os
 from typing import Any
 
-import google.generativeai as genai
 from openai import OpenAI
 
 
@@ -33,6 +32,9 @@ class GeminiClient:
         self.model_name = resolved_model_name
         self.provider = "gemini" if self._looks_like_gemini_api_key(resolved_api_key) else "groq"
         if self.provider == "gemini":
+            # Import lazily so Groq-only setups avoid deprecated SDK warnings at import time.
+            import google.generativeai as genai
+
             genai.configure(api_key=resolved_api_key)
             self.gemini_model = genai.GenerativeModel(self.model_name)
             self.client = None
