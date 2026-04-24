@@ -75,3 +75,6 @@ streamlit run app.py
 
 - Generated markdown roadmap
 - Judge score and feedback
+
+## Live App
+https://tech-career-switcher-763modqfewb8ya2sz5xgfx.streamlit.app/
